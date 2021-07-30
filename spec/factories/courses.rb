@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :course do
-    name { "Test Course" }
+    name { Faker::Name.name }
     association :coach
     # activities { [association(:activity)] }
     self_assignable { false }

@@ -46,7 +46,8 @@ curl 'http://localhost:3000/api/v1/courses?filter\[self_assignable\]=true' | jq 
 Create a resource
 
 ```
-curl -H 'Content-Type: application/vnd.api+json' \
-  -XPOST http://localhost:3000/api/v1/courses \
-  -d '{"data": { "type": "courses", "attributes": {"name":"Course-1", "coach_id": 5 } } }'
+curl -i -H "Accept: application/vnd.api+json"
+  -H 'Content-Type:application/vnd.api+json'
+  -X POST -d '{"data": {"type":"courses", "relationships": { "coach": { "data": { "type": "coaches", "id": "1" }}}, "attributes":{"name":"Test Course", "self_assignable": true}}}' http://localhost:3000/api/v1/courses
+
 ```
