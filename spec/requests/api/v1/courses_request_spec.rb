@@ -20,7 +20,26 @@ RSpec.describe "Api::V1::Courses", type: :request do
     let!(:coach) {create(:coach)}
 
     before do
-      post '/api/v1/courses',headers: {'Content-type': 'application/vnd.api+json'}, params: '{"data": {"type":"courses", "relationships": { "coach": { "data": { "type": "coaches", "id": 1 }}}, "attributes":{"name":"Test Course", "self_assignable": true}}}'
+      post '/api/v1/courses', \
+        headers: {
+          'Content-type': 'application/vnd.api+json'
+        }, params: {
+          "data": {
+            "type": "courses",
+            "relationships": {
+              "coach": {
+                "data": {
+                  "type": "coaches",
+                  "id": coach.id
+                }
+              }
+            },
+            "attributes": {
+              "name":"Test Course",
+              "self_assignable": true
+              }
+            }
+          }.to_json
     end
 
     it 'returns the course' do
